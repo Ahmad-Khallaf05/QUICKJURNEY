@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="">
+        <a class="navbar-brand brand-logo" href="{{ route('home') }}">
             <img src="{{asset('logo.png')}}" alt="logo" style="width: 200px; height:60px"/>
         </a>
         <a class="navbar-brand brand-logo-mini" href="index.html">

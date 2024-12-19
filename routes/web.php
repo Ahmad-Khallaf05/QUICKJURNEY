@@ -131,6 +131,19 @@ Route::get('/apoutus', function () {
 
 
 Route::get('/show/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware(['auth']);
+
+// Password Reset Request Route
+Route::get('/password/reset', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
+// Password Reset Submission Route
+Route::post('/password/email', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// Password Reset Form Route
+Route::get('/password/reset/{token}', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+// Password Reset Submission
+Route::post('/password/reset', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');
+
 Route::get('/profile/showadmin', [ProfileController::class, 'showadmin'])->name('profile.showadmin')->middleware(['auth']);
 Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update')->middleware(['auth']);
 

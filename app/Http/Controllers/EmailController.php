@@ -45,7 +45,7 @@ class EmailController extends Controller
 
         try {
 
-            Mail::to('awaysheh6930@gmail.com')->send(new contact($subject,$messageContent,$sender));
+            Mail::to('ahmadmajedkhallaf470@gmail.com')->send(new contact($subject,$messageContent,$sender));
 
             return back()->with('success', 'Thanks for contacting us!');
 

@@ -14,29 +14,39 @@
                     {{ Session::get('error') }}
                 </div>
             @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="{{ route('booking.update', $booking->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control" id="status" name="status">
-                        <option value="inprogress" {{ $booking->status == 'inprogress' ? 'selected' : '' }}>inprogress
-                        </option>
-                        <option value="completed" {{ $booking->status == 'completed' ? 'selected' : '' }}>completed</option>
-                        <option value="cancelled" {{ $booking->status == 'cancelled' ? 'selected' : '' }}>cancelled</option>
+                        <option value="inprogress" {{ $booking->status == 'inprogress' ? 'selected' : '' }}>In Progress</option>
+                        <option value="completed" {{ $booking->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                        <option value="cancelled" {{ $booking->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                     </select>
                 </div>
-                
+
+                <button type="submit" class="btn btn-outline-info">Update</button>
+                <a href="{{ url('/booking') }}" class="btn btn-outline-secondary">Cancel</a>
             </form>
-            <h1>{{ $booking->user->name }} Booking</h1>
+
+            <h2 class="mt-4">{{ $booking->user->name }}'s Booking</h2>
             <p>
                 <strong>Trip ID:</strong> {{ $booking->trip_id }}<br>
-                <strong>Status:</strong> {{ $booking->status }}<br>
-                <strong>Total Price:</strong> {{ $booking->trip->price }}
+                <strong>Status:</strong> {{ ucfirst($booking->status) }}<br>
+                <strong>Total Price:</strong> {{ number_format($booking->trip->price, 2) }}
             </p>
-
-            <button type="submit" class="btn btn-outline-info">Update</button>
-            <a href="{{url('/booking')}}" class="btn btn-outline-secondary">Cancel</a>
         </div>
     </div>
 @endsection
